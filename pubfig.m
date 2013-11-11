@@ -68,7 +68,7 @@ classdef pubfig
                    
           
            
-           myfig.set_axishnd_tick_spacing(5, ahnd, XYZind, true);
+           pubfig.set_axishnd_tick_spacing(5, ahnd, XYZind, true);
            axticks = get(ahnd, [XYZind 'TickLabel']);
            newticks = [];
            for cnt = 1:size(axticks,1)
@@ -109,8 +109,12 @@ classdef pubfig
            if(toround == true)
                interval = round(interval);
            end
+           if toround == false
+               set(ahnd, [XYZind 'Tick'], inlims(1):interval:inlims(2));
+           else 
+               set(ahnd, [XYZind 'Tick'], floor(inlims(1)):interval:ceil(inlims(2)));
+           end
            
-           set(ahnd, [XYZind 'Tick'], inlims(1):interval:inlims(2));
        end
 
        function set_axis_tick_spacing(nintervals, fhnd, toround)
@@ -239,7 +243,7 @@ classdef pubfig
            
            
            if ~ispc
-               myfig.print_eps(filename,  fhnd, {ftype})
+               pubfig.print_eps(filename,  fhnd, {ftype})
            else
                
                A3sizecm = [ 14.85, 21];
@@ -271,9 +275,9 @@ classdef pubfig
                fhnd = gcf;
            end
            
-           myfig.text_size(20, fhnd);
-           myfig.set_axis_tick_spacing(5, fhnd);
-           myfig.setbox('off', fhnd)
+           pubfig.text_size(20, fhnd);
+           pubfig.set_axis_tick_spacing(5, fhnd);
+           pubfig.setbox('off', fhnd)
        end
 
        function your_own_template(fhnd)
