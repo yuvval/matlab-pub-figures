@@ -49,6 +49,7 @@ figure(31);
 pubfig.text_size(20, 30); % setting the fontsize of figure 30, though gca is 31
 
 imagesc(log(a));
+colormap(clr.map_darkpink)
 hcbr = colorbar;
 title(['title line1' pubfig.newline 'line2'])
 xlabel('x label');
