@@ -31,6 +31,9 @@ classdef clr
            [85 107 47 ]/255;];
    end
    methods(Static)
+       function n = clr_num()
+           n = size(clr.num,1);
+       end
        function cmap = map_darkpink()
            tmp = pink;  
            cmap = tmp(1:32,:);

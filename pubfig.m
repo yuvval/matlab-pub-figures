@@ -4,6 +4,11 @@ classdef pubfig
 % pubfig.funcname(...)
 
    properties(Constant)
+       pathname = '~/www/figs';
+   end
+   
+   properties(Constant)
+       
    end
    
    methods(Static)
@@ -263,6 +268,36 @@ classdef pubfig
            
        end
        
+       function save(fname_fig,  ftype, fhnd)
+           % function print_fig(filename,  ftype, fhnd)
+           % prints a figure to a specific format file
+           % ftype is the format type. e.g. 'jpeg', 'tiff', 'png'. 
+           %       Default value is 'tiff'
+           % fhnd is the figure handle, default is gcf
+           if nargin<3
+               fhnd = gcf;
+           end
+           
+           if nargin<2
+               ftype = 'tiff';
+           end    
+           
+           switch ftype
+               case 'tiff'
+                   ext = 'tif';
+               case 'jpeg'
+                   ext = 'jpg';
+               otherwise
+                   ext = [ftype];
+           end
+           
+           if nargin < 1
+               
+               fname_fig = ['figure' num2str(fhnd)];
+           end
+           
+           saveas(fhnd, fname_fig, ext);
+       end
        function template1(fhnd)
            % function template1(fhnd)
            % template1 is a automatic template to run a set of styling
@@ -290,7 +325,13 @@ classdef pubfig
            end
        end
            
-       
+       function fname_fig = titlestr_to_fname(title_str)
+           fname_fig = regexprep(title_str, ' ', '_' );
+           fname_fig = regexprep(fname_fig, ',', '' );
+           fname_fig = regexprep(fname_fig, '\\_', '_' );
+           fname_fig = regexprep(fname_fig, '\n', '_' );
+       end
+           
        function char = newline()
            % function char = newline()
            % return a newline char (sprintf('\n'))
